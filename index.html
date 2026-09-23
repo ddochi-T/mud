@@ -1,0 +1,2333 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#176a68">
+  <meta name="description" content="초등학교 3학년 과학 — 이야기와 퀴즈로 만나는 갯벌의 가치">
+  <title>갯벌의 하루</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23176a68'/%3E%3Cpath d='M9 37c8-7 15-7 23 0s15 7 23 0v10c-8 7-15 7-23 0s-15-7-23 0V37Z' fill='%237dd9cc'/%3E%3Ccircle cx='43' cy='20' r='8' fill='%23ffd66b'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --ink: #183f3c;
+      --ink-soft: #41635f;
+      --deep: #176a68;
+      --deep-2: #0e5554;
+      --mint: #72d3c5;
+      --mint-soft: #dff6ef;
+      --cream: #fffaf0;
+      --paper: rgba(255, 252, 243, .94);
+      --sand: #f3d69b;
+      --sun: #ffd56c;
+      --coral: #f07f67;
+      --mud: #a67850;
+      --line: rgba(24, 63, 60, .14);
+      --shadow: 0 20px 55px rgba(24, 63, 60, .18);
+      --shadow-soft: 0 10px 26px rgba(24, 63, 60, .12);
+      --radius-xl: 34px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body { min-height: 100%; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 9% 12%, rgba(255, 213, 108, .4), transparent 28%),
+        radial-gradient(circle at 91% 82%, rgba(114, 211, 197, .34), transparent 31%),
+        linear-gradient(145deg, #e9f8f1 0%, #c9eee8 55%, #f7e4ba 120%);
+      font-family: "SUIT Variable", "SUIT", "Pretendard Variable", "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      letter-spacing: -.012em;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+    }
+
+    button { font: inherit; letter-spacing: inherit; }
+
+    button:focus-visible,
+    [tabindex]:focus-visible {
+      outline: 4px solid rgba(255, 213, 108, .95);
+      outline-offset: 3px;
+    }
+
+    .ambient {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .ambient::before,
+    .ambient::after {
+      content: "";
+      position: absolute;
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      filter: blur(2px);
+      opacity: .34;
+    }
+
+    .ambient::before {
+      left: -170px;
+      top: 18%;
+      background: rgba(255, 255, 255, .8);
+    }
+
+    .ambient::after {
+      right: -180px;
+      bottom: -120px;
+      background: rgba(255, 213, 108, .56);
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      width: min(1440px, 100%);
+      min-height: 100vh;
+      margin: 0 auto;
+      padding: max(18px, env(safe-area-inset-top)) clamp(16px, 3vw, 44px) max(20px, env(safe-area-inset-bottom));
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 16px;
+    }
+
+    .topbar {
+      min-height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 0;
+      color: var(--ink);
+      background: transparent;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      color: white;
+      border-radius: 15px 15px 18px 15px;
+      background: linear-gradient(145deg, #23837d, #105a58);
+      box-shadow: 0 7px 0 rgba(13, 79, 76, .13), inset 0 1px rgba(255,255,255,.35);
+      transform: rotate(-2deg);
+    }
+
+    .brand-mark svg { width: 26px; height: 26px; }
+    .brand strong { font-size: clamp(18px, 2vw, 23px); letter-spacing: -.025em; }
+
+    .top-actions { display: flex; align-items: center; gap: 9px; }
+
+    .discovery-pill,
+    .icon-button {
+      border: 1px solid rgba(255,255,255,.72);
+      background: rgba(255, 252, 243, .78);
+      box-shadow: 0 8px 24px rgba(24, 63, 60, .1), inset 0 1px white;
+      backdrop-filter: blur(12px);
+    }
+
+    .discovery-pill {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px 8px 11px;
+      border-radius: 999px;
+      color: var(--ink-soft);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .discovery-pill .shell { font-size: 21px; line-height: 1; }
+    .discovery-pill b { color: var(--deep); }
+
+    .icon-button {
+      width: 44px;
+      height: 44px;
+      border-radius: 15px;
+      color: var(--deep-2);
+      cursor: pointer;
+      transition: transform .18s ease, background .18s ease;
+    }
+
+    .icon-button:hover { transform: translateY(-2px); background: var(--cream); }
+    .icon-button svg { width: 22px; height: 22px; vertical-align: middle; }
+
+    .game-card {
+      position: relative;
+      width: 100%;
+      min-height: min(780px, calc(100vh - 104px));
+      border: 8px solid rgba(255, 252, 243, .88);
+      border-radius: 38px;
+      background: #b7dfd8;
+      box-shadow: var(--shadow), inset 0 0 0 1px rgba(24, 63, 60, .08);
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    #screen { min-height: inherit; }
+
+    .scene-image,
+    .scene-video {
+      --scene-flip: 1;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      transform: scaleX(var(--scene-flip)) scale(1.025);
+      transform-origin: center center;
+      transition: opacity .45s ease, filter .45s ease;
+      will-change: transform;
+      z-index: -3;
+    }
+
+    .scene-video {
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(var(--video-scale, 1.03));
+      transition: opacity .45s ease;
+    }
+
+    .scene-video.active { opacity: 1; }
+    .scene-image.video-active { opacity: 0 !important; }
+
+    .scene-image.scene-motion-still { animation: none; transform: scaleX(var(--scene-flip)) scale(1.03); }
+    .scene-image.scene-motion-food { animation: scene-focus-food 18s ease-in-out infinite alternate; }
+    .scene-image.scene-motion-water { animation: scene-focus-water 20s ease-in-out infinite alternate; }
+    .scene-image.scene-motion-storm { animation: scene-drift-storm 15s ease-in-out infinite alternate; }
+    .scene-image.scene-motion-sunset { animation: scene-drift-sunset 24s ease-in-out infinite alternate; }
+
+    .scene-tint {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background:
+        linear-gradient(90deg, rgba(11, 48, 46, .12), transparent 55%),
+        linear-gradient(0deg, rgba(9, 42, 40, .42), transparent 56%);
+      pointer-events: none;
+      transition: background .4s ease;
+    }
+
+    .scene-grain {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: .12;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
+      mix-blend-mode: soft-light;
+    }
+
+    .scene-effects {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .crab-sprite,
+    .bird-flock {
+      position: absolute;
+      display: block;
+      object-fit: contain;
+      will-change: left, top, transform, opacity;
+    }
+
+    .crab-mask {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: rgba(114, 98, 77, .46);
+      backdrop-filter: blur(10px);
+      box-shadow: inset 0 0 26px rgba(101,85,67,.36);
+    }
+
+    .crab-mask { left: 28%; top: 68%; width: 11%; height: 12%; opacity: .9; }
+
+    .crab-sprite {
+      left: 28%;
+      top: 68%;
+      width: clamp(94px, 11vw, 162px);
+      transform: translate(-50%, -50%);
+      filter: brightness(.84) saturate(.92) drop-shadow(0 6px 5px rgba(51,39,28,.22));
+      animation: crab-emerge 10.2s ease forwards;
+    }
+
+    .scene-effects.crab-go-home .crab-sprite {
+      animation: crab-go-home 3.2s cubic-bezier(.35,.02,.25,1) forwards;
+    }
+
+    .bird-flock {
+      left: -18%;
+      top: 2%;
+      width: clamp(190px, 25vw, 370px);
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(.42) rotate(-8deg);
+      filter: drop-shadow(0 8px 7px rgba(42,49,47,.18));
+      animation: bird-flock-arrive 7.8s cubic-bezier(.32,.02,.22,1) forwards;
+    }
+
+    .storm-flash {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      background: rgba(225, 244, 255, .72);
+      mix-blend-mode: screen;
+      animation: storm-flash 8.5s ease-in-out infinite;
+    }
+
+    .sunset-glow {
+      position: absolute;
+      inset: 0;
+      opacity: .45;
+      background: radial-gradient(circle at 90% 24%, rgba(255,221,128,.52), transparent 24%);
+      mix-blend-mode: screen;
+      animation: sunset-breathe 5.5s ease-in-out infinite alternate;
+    }
+
+    .intro-screen,
+    .scene-screen,
+    .ending-screen {
+      min-height: inherit;
+      padding: clamp(20px, 4.5vw, 66px);
+    }
+
+    .intro-screen {
+      display: grid;
+      align-items: end;
+    }
+
+    .intro-panel {
+      width: min(610px, 100%);
+      padding: clamp(24px, 4vw, 42px);
+      border: 1px solid rgba(255,255,255,.72);
+      border-radius: 32px 32px 32px 12px;
+      background: rgba(255, 251, 239, .91);
+      box-shadow: 0 22px 60px rgba(10, 48, 46, .22), inset 0 1px white;
+      backdrop-filter: blur(16px);
+      animation: panel-in .6s cubic-bezier(.2,.8,.2,1) both;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 11px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      color: #7c4e26;
+      background: #ffe6a9;
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: .01em;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    .intro-panel h1 {
+      margin-bottom: 12px;
+      font-size: clamp(38px, 7vw, 68px);
+      line-height: 1.12;
+      letter-spacing: -.045em;
+      color: var(--deep-2);
+    }
+
+    .intro-panel .lead {
+      max-width: 500px;
+      margin-bottom: 20px;
+      color: var(--ink-soft);
+      font-size: clamp(17px, 2vw, 21px);
+      line-height: 1.78;
+      letter-spacing: -.012em;
+      font-weight: 700;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+
+    .play-notes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 23px;
+    }
+
+    .play-note {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(23, 106, 104, .09);
+      color: var(--deep-2);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .primary-button,
+    .secondary-button {
+      min-height: 52px;
+      border: 0;
+      border-radius: 17px;
+      padding: 0 22px;
+      font-weight: 900;
+      cursor: pointer;
+      transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+    }
+
+    .primary-button {
+      color: white;
+      background: linear-gradient(145deg, #258c83, #12625f);
+      box-shadow: 0 8px 0 #0c504e, 0 13px 22px rgba(12, 80, 78, .2), inset 0 1px rgba(255,255,255,.28);
+    }
+
+    .primary-button:hover { transform: translateY(-2px); filter: saturate(1.08); }
+    .primary-button:active { transform: translateY(5px); box-shadow: 0 3px 0 #0c504e; }
+    .primary-button:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+
+    .secondary-button {
+      color: var(--deep-2);
+      background: #f2eee2;
+      box-shadow: 0 5px 0 #d8d0bf;
+    }
+
+    .secondary-button:hover { transform: translateY(-2px); }
+    .button-arrow { margin-left: 10px; font-size: 20px; }
+
+    .scene-screen {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(340px, 440px);
+      grid-template-rows: auto 1fr auto;
+      gap: 18px;
+      align-items: end;
+    }
+
+    .scene-heading {
+      position: relative;
+      z-index: 6;
+      grid-column: 1 / -1;
+      align-self: start;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 18px;
+    }
+
+    .time-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 38px;
+      padding: 7px 13px;
+      border-radius: 13px;
+      color: white;
+      background: rgba(14, 74, 72, .76);
+      border: 1px solid rgba(255,255,255,.38);
+      box-shadow: 0 8px 22px rgba(8, 42, 40, .2);
+      backdrop-filter: blur(10px);
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .scene-number {
+      color: rgba(255,255,255,.95);
+      text-shadow: 0 2px 12px rgba(11, 48, 46, .42);
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: .025em;
+    }
+
+    .story-panel,
+    .quiz-card {
+      grid-column: 1 / -1;
+      grid-row: 2 / 4;
+      align-self: end;
+      justify-self: center;
+      z-index: 7;
+      width: min(920px, 100%);
+      max-height: min(64vh, 570px);
+      margin-bottom: 58px;
+      overflow: auto;
+      overscroll-behavior: contain;
+      padding: clamp(18px, 2.4vw, 27px);
+      border: 1px solid rgba(255,255,255,.78);
+      border-radius: 27px 27px 16px 16px;
+      background: rgba(255, 252, 243, .94);
+      box-shadow: 0 22px 52px rgba(11, 48, 46, .25), inset 0 1px white;
+      backdrop-filter: blur(16px);
+    }
+
+    .reveal-item {
+      opacity: 0;
+      transform: translateY(42px) scale(.99);
+      pointer-events: none;
+      transition: opacity .58s cubic-bezier(.2,.8,.2,1), transform .58s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .reveal-item.revealed {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .story-kicker {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 8px;
+      color: var(--coral);
+      font-size: 14px;
+      font-weight: 950;
+      letter-spacing: .01em;
+    }
+
+    .sheet-topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 13px;
+    }
+
+    .sheet-caption {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--deep-2);
+      font-size: 14px;
+      font-weight: 950;
+      letter-spacing: .005em;
+    }
+
+    .sheet-handle {
+      width: 34px;
+      height: 5px;
+      border-radius: 999px;
+      background: rgba(23, 106, 104, .34);
+    }
+
+    .sheet-hide-button {
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 0 13px;
+      border: 1px solid rgba(23,106,104,.13);
+      border-radius: 13px;
+      color: var(--deep-2);
+      background: rgba(229, 245, 238, .82);
+      font-size: 14px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .sheet-hide-button:hover { background: #d9f1e8; }
+
+    .story-content-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.18fr) minmax(280px, .82fr);
+      gap: clamp(16px, 2.2vw, 26px);
+      align-items: start;
+    }
+
+    .story-side { display: grid; gap: 10px; }
+
+    .story-kicker::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--coral);
+      box-shadow: 0 0 0 5px rgba(240, 127, 103, .14);
+    }
+
+    .story-panel h2 {
+      margin-bottom: 10px;
+      color: var(--deep-2);
+      font-size: clamp(27px, 3.2vw, 38px);
+      line-height: 1.26;
+      letter-spacing: -.03em;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+
+    .story-text {
+      margin-bottom: 0;
+      color: var(--ink-soft);
+      font-size: clamp(16px, 1.7vw, 19px);
+      line-height: 1.76;
+      letter-spacing: -.01em;
+      font-weight: 700;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+
+    .clue-strip {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      color: #315d58;
+      background: #e5f5ee;
+      border: 1px solid rgba(23,106,104,.09);
+      font-size: 15px;
+      line-height: 1.64;
+      letter-spacing: -.008em;
+      font-weight: 800;
+    }
+
+    .clue-icon {
+      flex: 0 0 auto;
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      border-radius: 11px;
+      background: white;
+      font-size: 19px;
+      box-shadow: 0 4px 12px rgba(23,106,104,.1);
+    }
+
+    .quiz-card { width: min(720px, 100%); }
+
+    .quiz-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 10px;
+      color: var(--deep);
+      font-size: 13px;
+      font-weight: 950;
+      letter-spacing: .02em;
+    }
+
+    .quiz-label span:last-child {
+      color: #7f6d51;
+      letter-spacing: 0;
+      font-weight: 800;
+    }
+
+    .quiz-card h3 {
+      margin-bottom: 15px;
+      font-size: clamp(18px, 2vw, 22px);
+      line-height: 1.58;
+      letter-spacing: -.022em;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+
+    .answers { display: grid; gap: 9px; }
+
+    .answer-button {
+      position: relative;
+      width: 100%;
+      min-height: 49px;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 11px 13px;
+      border: 2px solid transparent;
+      border-radius: 15px;
+      color: var(--ink);
+      background: #f3efe4;
+      text-align: left;
+      font-weight: 820;
+      line-height: 1.5;
+      letter-spacing: -.008em;
+      cursor: pointer;
+      transition: transform .15s ease, border-color .15s ease, background .15s ease;
+    }
+
+    .answer-button:hover { transform: translateX(3px); background: #fff4d6; }
+
+    .answer-index {
+      flex: 0 0 auto;
+      width: 29px;
+      height: 29px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      color: #6e644f;
+      background: white;
+      box-shadow: 0 3px 8px rgba(24,63,60,.08);
+      font-size: 13px;
+      font-weight: 950;
+    }
+
+    .answer-button.selected {
+      border-color: var(--mint);
+      background: #e7f8f2;
+    }
+
+    .answer-button.correct {
+      border-color: #3caf86;
+      background: #dcf5e8;
+      color: #175a43;
+    }
+
+    .answer-button.wrong {
+      border-color: #e69b75;
+      background: #fff0e6;
+      animation: shake .35s ease;
+    }
+
+    .interaction-card {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 11px;
+      padding: 13px 14px;
+      border: 1px solid rgba(23,106,104,.12);
+      border-radius: 18px;
+      color: #285b56;
+      background: rgba(255,255,255,.72);
+    }
+
+    .interaction-card.complete { background: #e3f6ed; }
+
+    .interaction-icon {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      color: white;
+      background: var(--deep);
+      font-size: 18px;
+      font-weight: 950;
+    }
+
+    .interaction-copy strong,
+    .interaction-copy span { display: block; }
+    .interaction-copy strong { font-size: 14px; letter-spacing: -.01em; }
+    .interaction-copy span { margin-top: 2px; font-size: 13px; line-height: 1.55; font-weight: 750; }
+
+    .interaction-status {
+      min-width: 58px;
+      padding: 6px 9px;
+      border-radius: 999px;
+      color: var(--deep-2);
+      background: #e5f5ee;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 950;
+      white-space: nowrap;
+    }
+
+    .story-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-top: 15px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(24,63,60,.1);
+    }
+
+    .quiz-gate-message {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 14px;
+      line-height: 1.6;
+      font-weight: 780;
+    }
+
+    .story-actions .primary-button {
+      flex: 0 0 auto;
+      min-height: 46px;
+      padding: 0 18px;
+      border-radius: 15px;
+      font-size: 14px;
+      box-shadow: 0 6px 0 #0c504e;
+    }
+
+    .scene-hotspots {
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    .hotspot {
+      position: absolute;
+      width: 52px;
+      height: 52px;
+      transform: translate(-50%, -50%);
+      display: grid;
+      place-items: center;
+      border: 2px solid rgba(255,255,255,.96);
+      border-radius: 50%;
+      color: white;
+      background: rgba(9, 80, 77, .76);
+      box-shadow: 0 0 0 7px rgba(255,255,255,.2), 0 9px 26px rgba(4,38,36,.34);
+      pointer-events: auto;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 950;
+      animation: hotspot-pulse 1.9s ease-in-out infinite;
+      transition: transform .18s ease, opacity .18s ease, background .18s ease;
+    }
+
+    .hotspot:hover { transform: translate(-50%, -50%) scale(1.08); }
+    .hotspot:disabled { cursor: default; opacity: .35; animation: none; }
+    .hotspot.found { opacity: 1; background: #f07f67; animation: none; }
+
+    .hotspot-label {
+      position: absolute;
+      left: 50%;
+      top: calc(100% + 9px);
+      transform: translateX(-50%);
+      max-width: 120px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      color: white;
+      background: rgba(10,64,61,.86);
+      box-shadow: 0 7px 18px rgba(5,38,36,.22);
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.3;
+      white-space: nowrap;
+    }
+
+    .hotspot.low .hotspot-label {
+      top: auto;
+      bottom: calc(100% + 9px);
+    }
+
+    .scene-control-dock {
+      position: absolute;
+      left: 50%;
+      bottom: 68px;
+      z-index: 8;
+      transform: translateX(-50%);
+      width: min(600px, calc(100% - 32px));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 11px 10px 16px;
+      border: 1px solid rgba(255,255,255,.72);
+      border-radius: 18px;
+      color: white;
+      background: rgba(9, 67, 64, .82);
+      box-shadow: 0 15px 36px rgba(6,43,41,.28);
+      backdrop-filter: blur(14px);
+    }
+
+    .scene-control-status { font-size: 14px; font-weight: 850; line-height: 1.45; }
+    .scene-control-actions { display: flex; gap: 7px; }
+    .dock-button {
+      min-height: 40px;
+      padding: 0 13px;
+      border: 0;
+      border-radius: 12px;
+      color: var(--deep-2);
+      background: rgba(255,255,255,.94);
+      font-size: 13px;
+      font-weight: 950;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .dock-button.quiz-ready {
+      color: #5d4300;
+      border: 3px solid #ffd75c;
+      background: #fff5bd;
+      animation: quiz-ready-pulse 1.05s ease-in-out infinite;
+    }
+
+    .quiz-ready-signal {
+      color: #4f3b00;
+      border: 3px solid #ffd75c !important;
+      background: linear-gradient(145deg, #fff0a1, #ffd75c) !important;
+      box-shadow: 0 6px 0 #c79b18, 0 0 0 5px rgba(255,215,92,.18) !important;
+      animation: quiz-ready-pulse 1.05s ease-in-out infinite;
+    }
+
+    .quiz-card.quiz-attention {
+      animation: quiz-card-attention .72s ease-in-out 3;
+    }
+
+    .quiz-feedback {
+      display: none;
+      margin-top: 13px;
+      padding: 13px 14px;
+      border-radius: 15px;
+      font-size: 14px;
+      font-weight: 820;
+      line-height: 1.68;
+      letter-spacing: -.008em;
+      word-break: keep-all;
+    }
+
+    .quiz-feedback.show { display: block; animation: fade-up .28s ease both; }
+    .quiz-feedback.hint { color: #864a2d; background: #fff0e4; }
+    .quiz-feedback.success { color: #175a43; background: #dcf5e8; }
+
+    .quiz-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 9px;
+      margin-top: 14px;
+    }
+
+    .quiz-actions .primary-button,
+    .quiz-actions .secondary-button { min-height: 45px; padding: 0 17px; border-radius: 14px; font-size: 14px; }
+    .quiz-actions .primary-button { box-shadow: 0 6px 0 #0c504e; }
+    .quiz-actions .primary-button:active { box-shadow: 0 2px 0 #0c504e; transform: translateY(4px); }
+
+    .progress-dock {
+      position: absolute;
+      left: 50%;
+      bottom: 14px;
+      z-index: 4;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px;
+      border: 1px solid rgba(255,255,255,.58);
+      border-radius: 999px;
+      background: rgba(18, 71, 68, .63);
+      box-shadow: 0 10px 28px rgba(8, 42, 40, .2);
+      backdrop-filter: blur(12px);
+    }
+
+    .progress-dot {
+      width: 32px;
+      height: 10px;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(255,255,255,.38);
+      cursor: default;
+      transition: width .25s ease, background .25s ease, transform .2s ease;
+    }
+
+    .progress-dot.done { background: var(--sun); }
+    .progress-dot.current { width: 52px; background: white; }
+    .progress-dot.reachable { cursor: pointer; }
+    .progress-dot.reachable:hover { transform: scaleY(1.35); }
+
+    .value-pop {
+      position: fixed;
+      left: 50%;
+      top: 92px;
+      z-index: 20;
+      min-width: min(360px, calc(100vw - 32px));
+      transform: translate(-50%, -22px) scale(.94);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 17px;
+      border: 1px solid rgba(255,255,255,.75);
+      border-radius: 18px;
+      color: var(--deep-2);
+      background: rgba(255, 250, 236, .95);
+      box-shadow: var(--shadow-soft);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s ease, transform .25s ease;
+    }
+
+    .value-pop.show { opacity: 1; transform: translate(-50%, 0) scale(1); }
+    .value-pop-icon { font-size: 28px; }
+    .value-pop small { display: block; color: #7a715f; font-weight: 800; }
+    .value-pop strong { display: block; margin-top: 2px; font-size: 18px; }
+
+    .ending-screen {
+      display: grid;
+      align-content: center;
+      justify-items: center;
+      background: linear-gradient(0deg, rgba(20, 65, 61, .5), rgba(20, 65, 61, .08));
+    }
+
+    .ending-panel {
+      width: min(940px, 100%);
+      max-height: calc(100vh - 150px);
+      overflow: auto;
+      padding: clamp(23px, 4vw, 42px);
+      border: 1px solid rgba(255,255,255,.76);
+      border-radius: 32px;
+      background: rgba(255, 251, 240, .95);
+      box-shadow: 0 24px 64px rgba(10, 48, 46, .3), inset 0 1px white;
+      backdrop-filter: blur(16px);
+      animation: panel-in .55s cubic-bezier(.2,.8,.2,1) both;
+    }
+
+    .ending-title-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .ending-panel h2 {
+      margin-bottom: 6px;
+      color: var(--deep-2);
+      font-size: clamp(30px, 5vw, 49px);
+      line-height: 1.18;
+      letter-spacing: -.035em;
+    }
+
+    .ending-panel .ending-lead {
+      margin: 0;
+      color: var(--ink-soft);
+      font-weight: 750;
+      line-height: 1.6;
+    }
+
+    .value-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 18px 0 22px;
+    }
+
+    .value-card {
+      min-height: 96px;
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      align-items: center;
+      gap: 11px;
+      padding: 14px;
+      border: 2px solid transparent;
+      border-radius: 18px;
+      color: var(--ink);
+      background: #f4efe3;
+      text-align: left;
+      cursor: pointer;
+      transition: transform .16s ease, background .16s ease, border-color .16s ease;
+    }
+
+    .value-card:hover { transform: translateY(-3px); background: #fff3d4; }
+    .value-card.selected { border-color: var(--mint); background: #e2f6ef; }
+    .value-card .value-icon { font-size: 30px; }
+    .value-card strong { display: block; color: var(--deep-2); font-size: 16px; }
+    .value-card small { display: block; margin-top: 3px; color: #657672; font-size: 13px; font-weight: 750; line-height: 1.35; }
+
+    .reflection-box {
+      padding: 18px;
+      border-radius: 20px;
+      background: #e9f6f1;
+      border: 1px solid rgba(23,106,104,.1);
+    }
+
+    .reflection-box .prompt {
+      margin-bottom: 10px;
+      color: var(--deep-2);
+      font-weight: 950;
+    }
+
+    .sentence-output {
+      min-height: 58px;
+      display: flex;
+      align-items: center;
+      padding: 14px 16px;
+      border-radius: 15px;
+      background: white;
+      color: var(--ink);
+      line-height: 1.55;
+      font-weight: 780;
+      box-shadow: inset 0 0 0 1px rgba(23,106,104,.11);
+      word-break: keep-all;
+    }
+
+    .ending-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .ending-actions-group { display: flex; flex-wrap: wrap; gap: 9px; }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 28px;
+      z-index: 30;
+      transform: translate(-50%, 16px);
+      padding: 11px 16px;
+      border-radius: 999px;
+      color: white;
+      background: rgba(20, 74, 71, .94);
+      box-shadow: var(--shadow-soft);
+      font-size: 14px;
+      font-weight: 850;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s ease, transform .2s ease;
+    }
+
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+    .screen-reader-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    [hidden] { display: none !important; }
+
+    @keyframes panel-in {
+      from { opacity: 0; transform: translateY(18px) scale(.985); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(7px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+
+    @keyframes hotspot-pulse {
+      0%, 100% { box-shadow: 0 0 0 6px rgba(255,255,255,.17), 0 9px 26px rgba(4,38,36,.3); }
+      50% { box-shadow: 0 0 0 12px rgba(255,255,255,.06), 0 11px 30px rgba(4,38,36,.38); }
+    }
+
+    @keyframes quiz-ready-pulse {
+      0%, 100% { outline: 2px solid rgba(255,215,92,.22); outline-offset: 2px; filter: brightness(1); }
+      50% { outline: 6px solid rgba(255,215,92,.62); outline-offset: 6px; filter: brightness(1.08); }
+    }
+
+    @keyframes quiz-card-attention {
+      0%, 100% { border-color: rgba(255,255,255,.78); box-shadow: 0 22px 52px rgba(11,48,46,.25), inset 0 1px white; }
+      50% { border-color: #ffd75c; box-shadow: 0 0 0 7px rgba(255,215,92,.48), 0 22px 52px rgba(11,48,46,.25); }
+    }
+
+    @keyframes crab-go-home {
+      0% { left: 28%; top: 68%; transform: translate(-50%,-50%) scale(1) rotate(0); opacity: 1; }
+      32% { left: 33%; top: 67%; transform: translate(-50%,-50%) scale(.94) rotate(3deg); opacity: 1; }
+      67% { left: 39%; top: 73%; transform: translate(-50%,-50%) scale(.76) rotate(-3deg); opacity: 1; }
+      100% { left: 43%; top: 77%; transform: translate(-50%,-50%) scale(.12) rotate(4deg); opacity: 0; }
+    }
+
+    @keyframes crab-emerge {
+      0%, 58% { opacity: 0; transform: translate(-50%,-50%) scale(.72); }
+      100% { opacity: 1; transform: translate(-50%,-50%) scale(1); }
+    }
+
+    @keyframes bird-flock-arrive {
+      0% { left: -18%; top: 2%; transform: translate(-50%,-50%) scale(.42) rotate(-8deg); opacity: 0; }
+      12% { opacity: 1; }
+      48% { left: 24%; top: 14%; transform: translate(-50%,-50%) scale(.58) rotate(3deg); opacity: 1; }
+      82% { left: 49%; top: 31%; transform: translate(-50%,-50%) scale(.82) rotate(-2deg); opacity: 1; }
+      100% { left: 55%; top: 39%; transform: translate(-50%,-50%) scale(.92) rotate(0); opacity: 0; }
+    }
+
+    @keyframes storm-flash {
+      0%, 17%, 20%, 58%, 61%, 100% { opacity: 0; }
+      18%, 59% { opacity: .52; }
+      19%, 60% { opacity: .12; }
+    }
+
+    @keyframes sunset-breathe {
+      from { opacity: .3; }
+      to { opacity: .52; }
+    }
+
+    @keyframes scene-focus-food {
+      from { transform: scaleX(var(--scene-flip)) scale(1.11) translate3d(-1.4%,1.4%,0); }
+      to { transform: scaleX(var(--scene-flip)) scale(1.18) translate3d(1.2%,-.4%,0); }
+    }
+
+    @keyframes scene-focus-water {
+      from { transform: scaleX(var(--scene-flip)) scale(1.09) translate3d(-.4%,0,0); }
+      to { transform: scaleX(var(--scene-flip)) scale(1.15) translate3d(.7%,.7%,0); }
+    }
+
+    @keyframes scene-drift-storm {
+      from { transform: scaleX(var(--scene-flip)) scale(1.045) translate3d(-.45%,-.2%,0); }
+      to { transform: scaleX(var(--scene-flip)) scale(1.09) translate3d(.7%,.4%,0); }
+    }
+
+    @keyframes scene-drift-sunset {
+      from { transform: scaleX(var(--scene-flip)) scale(1.035) translate3d(-.35%,-.15%,0); }
+      to { transform: scaleX(var(--scene-flip)) scale(1.075) translate3d(.75%,.4%,0); }
+    }
+
+    @media (max-width: 920px) {
+      .page { min-height: 100svh; }
+      .game-card { min-height: calc(100svh - 98px); overflow: hidden; }
+      .scene-image, .scene-video, .scene-tint, .scene-grain { height: 100%; border-radius: 0; }
+      .intro-screen, .scene-screen, .ending-screen { min-height: auto; padding: 18px; }
+      .intro-screen, .scene-screen, .ending-screen { min-height: inherit; }
+      .intro-screen { min-height: clamp(520px, calc(100svh - 100px), 720px); align-items: end; }
+      .intro-panel { margin-top: 180px; }
+      .scene-screen {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr auto;
+        gap: 12px;
+      }
+      .scene-heading { grid-row: 1; }
+      .story-panel, .quiz-card {
+        grid-column: 1;
+        grid-row: 2 / 4;
+        width: 100%;
+        max-height: calc(100% - 94px);
+        margin-bottom: 48px;
+        border-radius: 25px 25px 14px 14px;
+      }
+      .story-content-grid { grid-template-columns: 1fr; }
+      .progress-dock { position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%); width: max-content; margin: 0; }
+      .scene-control-dock { bottom: 64px; }
+      .ending-screen { min-height: inherit; padding-top: 92px; }
+      .ending-panel { max-height: calc(100svh - 168px); }
+    }
+
+    @media (max-width: 660px) {
+      .page { padding-left: 12px; padding-right: 12px; gap: 10px; }
+      .topbar { min-height: 52px; }
+      .brand-mark { width: 38px; height: 38px; border-radius: 13px; }
+      .brand strong { font-size: 18px; }
+      .discovery-pill { min-height: 40px; padding: 6px 10px; }
+      .discovery-pill .label { display: none; }
+      .icon-button { width: 40px; height: 40px; }
+      .intro-screen, .scene-screen, .ending-screen { padding: 12px; }
+      .intro-panel { padding: 24px 21px; border-radius: 27px 27px 27px 10px; }
+      .intro-panel h1 { font-size: 40px; }
+      .scene-heading { align-items: center; }
+      .story-panel, .quiz-card { padding: 20px 18px; }
+      .story-panel h2 { font-size: 29px; }
+      .story-actions { align-items: stretch; flex-direction: column; }
+      .story-actions .primary-button { width: 100%; }
+      .scene-control-dock { align-items: stretch; padding: 11px; flex-direction: column; }
+      .scene-control-actions { width: 100%; }
+      .dock-button { flex: 1; }
+      .hotspot { width: 48px; height: 48px; }
+      .value-grid { grid-template-columns: 1fr 1fr; }
+      .value-card { min-height: 86px; grid-template-columns: 34px 1fr; padding: 11px; }
+      .value-card .value-icon { font-size: 25px; }
+      .ending-title-row { display: block; }
+      .ending-panel { padding: 22px 18px; border-radius: 26px; }
+      .ending-actions, .ending-actions-group { width: 100%; }
+      .ending-actions button { flex: 1; }
+      .progress-dot { width: 25px; }
+      .progress-dot.current { width: 39px; }
+    }
+
+    @media (max-width: 420px) {
+      .value-grid { grid-template-columns: 1fr; }
+      .play-notes { margin-bottom: 18px; }
+      .story-text { font-size: 16px; }
+      .clue-strip { padding: 12px 13px; }
+      .interaction-card { grid-template-columns: auto 1fr; }
+      .interaction-status { grid-column: 2; justify-self: start; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .scene-image, .scene-video { transform: scaleX(var(--scene-flip)) scale(1.025) !important; }
+    }
+
+    @media print {
+      body { background: white; }
+      .topbar, .scene-image, .scene-video, .scene-tint, .scene-grain, .scene-effects, .progress-dock, .scene-hotspots, .scene-control-dock, .ambient, .ending-actions { display: none !important; }
+      .page { display: block; padding: 0; }
+      .game-card { min-height: auto; border: 0; box-shadow: none; background: white; }
+      .ending-screen { min-height: auto; padding: 0; background: white; }
+      .ending-panel { max-height: none; border: 2px solid #b9d8ce; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="ambient" aria-hidden="true"></div>
+  <div class="page">
+    <header class="topbar">
+      <button class="brand" id="brandButton" aria-label="처음 화면으로 가기">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none"><path d="M3.5 17.5c4.5-4 8.5-4 13 0s8.5 4 12 0v6.2c-3.5 4-7.5 4-12 0s-8.5-4-13 0v-6.2Z" fill="currentColor"/><circle cx="22.5" cy="9" r="4.5" fill="#FFD56C"/></svg>
+        </span>
+        <strong>갯벌의 하루</strong>
+      </button>
+      <div class="top-actions">
+        <div class="discovery-pill" aria-live="polite">
+          <span class="shell" aria-hidden="true">🐚</span>
+          <span class="label">발견한 가치</span>
+          <b id="valueCount">0 / 6</b>
+        </div>
+        <button class="icon-button" id="soundButton" type="button" aria-label="장면 소리 켜기" title="장면 소리 켜기">
+          <svg id="soundIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><path d="m22 9-6 6M16 9l6 6"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="game-card" id="gameCard">
+      <img class="scene-image" id="sceneImage" src="assets/mudflat-morning.webp" alt="바닷물이 빠져 드러난 넓은 갯벌과 새, 게, 조개가 보이는 해안 풍경">
+      <video class="scene-video" id="sceneVideo" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+      <div class="scene-tint" id="sceneTint" aria-hidden="true"></div>
+      <div class="scene-grain" aria-hidden="true"></div>
+      <section id="screen" aria-live="polite"></section>
+      <nav class="progress-dock" id="progressDock" aria-label="이야기 진행" hidden></nav>
+    </main>
+  </div>
+
+  <div class="value-pop" id="valuePop" role="status" aria-live="polite">
+    <span class="value-pop-icon" id="valuePopIcon" aria-hidden="true">🐚</span>
+    <span><small>새로운 가치를 발견했어요</small><strong id="valuePopText"></strong></span>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <audio id="sceneAudio" loop preload="none"></audio>
+
+  <script>
+    (() => {
+      'use strict';
+
+      const scenes = [
+        {
+          time: '오전 6:10',
+          title: '물이 빠지자, 마을이 깨어났어요',
+          kicker: '첫 번째 장면 · 갯벌의 아침',
+          text: '바닷물이 멀리 물러가자 진흙 위로 게가 나오고, 조개가 숨 쉬는 작은 구멍과 갯지렁이가 남긴 고운 진흙 흔적이 보여요. 조용하던 땅이 사실은 수많은 생물의 집이었네요.',
+          clue: '게와 조개는 진흙과 얕은 물에서 살고, 갯지렁이는 진흙 속 굴에서 살아가요.',
+          clueIcon: '🦀',
+          question: '이 생물들에게 갯벌은 어떤 곳일까요?',
+          answers: ['자동차가 다니는 길', '살아가고 먹이를 찾는 삶터', '잠깐 사진만 찍는 곳'],
+          correct: [1],
+          hint: '게와 조개가 어디에서 먹이를 찾고 숨는지 떠올려 보세요.',
+          feedback: '맞아요. 갯벌은 다양한 생물이 먹이를 찾고 살아가는 삶터예요.',
+          value: '다양한 생물의 삶터',
+          icon: '🦀',
+          short: '생물이 살아가는 곳',
+          reason: '다양한 생물이 먹이를 찾고 살아갈 수 있게 해 주기',
+          interaction: {
+            instruction: '그림에서 생물이 살아가는 단서 3곳을 찾아 눌러 보세요.',
+            complete: '게, 조개, 작은 구멍을 모두 찾았어요.',
+            mode: 'any',
+            targets: [
+              { x: 28, y: 68, label: '게', effect: 'crab-go-home' },
+              { x: 65, y: 76, label: '조개' },
+              { x: 78, y: 66, label: '작은 구멍' }
+            ]
+          },
+          audio: 'assets/scene-1-morning-birdsong.mp3',
+          audioVolume: .2,
+          image: 'assets/mudflat-morning.webp',
+          video: 'assets/scene-1-tide-recede.mp4',
+          videoLoop: false,
+          videoScale: 1.03,
+          position: 'center 68%',
+          tint: 'linear-gradient(90deg, rgba(11,48,46,.12), transparent 58%), linear-gradient(0deg, rgba(9,42,40,.48), transparent 60%)'
+        },
+        {
+          time: '오전 8:30',
+          title: '멀리서 온 손님이 내려앉았어요',
+          kicker: '두 번째 장면 · 철새의 아침 식사',
+          text: '아주 먼 곳을 날아온 도요새가 얕은 물가에 내려앉았어요. 긴 부리로 작은 생물을 찾아 먹고, 날개를 쉬게 합니다. 긴 여행을 이어 가려면 이곳이 꼭 필요해요.',
+          clue: '철새는 이동하는 동안 갯벌에서 먹이를 먹고 쉬어 가요.',
+          clueIcon: '🐦',
+          question: '긴 여행을 온 철새에게 갯벌이 필요한 까닭은 무엇일까요?',
+          answers: ['먹이를 먹고 쉬어 가기 위해서', '높은 건물을 짓기 위해서', '자동차를 타기 위해서'],
+          correct: [0],
+          hint: '사진 속 새가 얕은 물에서 무엇을 하는지 살펴보세요.',
+          feedback: '맞아요. 갯벌은 먼 길을 가는 철새의 먹이터이자 쉼터예요.',
+          value: '철새의 먹이터와 쉼터',
+          icon: '🐦',
+          short: '철새가 먹고 쉬는 곳',
+          reason: '먼 길을 가는 철새가 먹이를 먹고 쉬어 갈 수 있게 해 주기',
+          interaction: {
+            instruction: '얕은 물에서 먹이를 찾는 철새 두 마리를 눌러 보세요.',
+            complete: '먹이를 찾는 철새 두 마리를 찾았어요.',
+            mode: 'any',
+            targets: [
+              { x: 37, y: 43, label: '철새 1' },
+              { x: 73, y: 50, label: '철새 2' }
+            ]
+          },
+          audio: 'assets/scene-2-seagulls.mp3',
+          audioVolume: .18,
+          image: 'assets/mudflat-morning.webp',
+          position: '59% 56%',
+          tint: 'linear-gradient(90deg, rgba(11,48,46,.08), transparent 62%), linear-gradient(0deg, rgba(9,42,40,.44), transparent 57%)'
+        },
+        {
+          time: '오전 11:20',
+          title: '갯벌이 마을의 식탁을 채워요',
+          kicker: '세 번째 장면 · 갯벌이 주는 것',
+          text: '마을 사람들은 갯벌에서 조개와 낙지 같은 먹거리를 얻어요. 갯벌은 생물에게만 필요한 곳이 아니라, 사람들의 생활에도 도움을 주는 소중한 공간이에요.',
+          clue: '갯벌에서는 여러 가지 수산물을 얻을 수 있어요.',
+          clueIcon: '🧺',
+          question: '사람들은 갯벌에서 무엇을 얻을 수 있을까요?',
+          answers: ['산꼭대기의 눈', '공장에서 만든 기계', '조개와 낙지 같은 먹거리'],
+          correct: [2],
+          hint: '갯벌의 진흙과 얕은 물에서 사는 생물을 생각해 보세요.',
+          feedback: '맞아요. 갯벌은 사람들에게 먹거리와 생활에 필요한 자원을 제공해요.',
+          value: '먹거리와 생활 자원',
+          icon: '🧺',
+          short: '사람에게 자원을 주는 곳',
+          reason: '사람들에게 먹거리와 생활에 필요한 자원을 주기',
+          interaction: {
+            instruction: '갯벌이 주는 먹거리의 단서 두 곳을 눌러 보세요.',
+            complete: '게와 조개를 찾아 갯벌의 먹거리 단서를 모았어요.',
+            mode: 'any',
+            targets: [
+              { x: 28, y: 68, label: '게' },
+              { x: 65, y: 76, label: '조개' }
+            ]
+          },
+          audio: 'assets/scene-3-ocean-waves.mp3',
+          audioVolume: .2,
+          image: 'assets/mudflat-morning.webp',
+          position: '42% 72%',
+          tint: 'linear-gradient(90deg, rgba(11,48,46,.11), transparent 60%), linear-gradient(0deg, rgba(9,42,40,.5), transparent 59%)'
+        },
+        {
+          time: '오후 2:10',
+          title: '물이 갯벌 사이를 천천히 지나가요',
+          kicker: '네 번째 장면 · 갯벌의 조용한 청소',
+          text: '바닷물은 넓은 갯벌의 진흙과 작은 생물 사이를 천천히 지나갑니다. 그 과정에서 갯벌은 물속의 오염 물질을 줄이고 물을 깨끗하게 하는 데 도움을 줘요.',
+          clue: '갯벌은 눈에 잘 띄지 않게 바닷물을 깨끗하게 만드는 일을 해요.',
+          clueIcon: '💧',
+          question: '갯벌이 물을 위해 하는 일로 알맞은 것은 무엇일까요?',
+          answers: ['물속 오염 물질을 줄이는 데 도움을 준다', '바닷물을 모두 없앤다', '바닷물을 달콤하게 바꾼다'],
+          correct: [0],
+          hint: '이 장면의 제목에 나온 “조용한 청소”를 떠올려 보세요.',
+          feedback: '맞아요. 갯벌은 물속 오염 물질을 줄여 바닷물을 깨끗하게 하는 데 도움을 줘요.',
+          value: '바닷물을 깨끗하게',
+          icon: '💧',
+          short: '오염 물질을 줄이는 곳',
+          reason: '물속 오염 물질을 줄여 바닷물을 깨끗하게 하는 데 도움을 주기',
+          interaction: {
+            instruction: '갯벌 사이의 물길이 잔잔하게 흐르는 모습을 천천히 살펴보세요.',
+            complete: '갯벌 사이로 이어지는 물길을 살펴보았어요.',
+            mode: 'observe',
+            targets: []
+          },
+          audio: null,
+          image: 'assets/mudflat-morning.webp',
+          video: 'assets/scene-4-water-flow.mp4',
+          videoScale: 1.12,
+          position: '58% 60%',
+          tint: 'linear-gradient(90deg, rgba(6,66,72,.1), rgba(75,175,170,.04)), linear-gradient(0deg, rgba(9,42,40,.45), transparent 58%)'
+        },
+        {
+          time: '오후 5:00',
+          title: '거센 파도가 갯벌을 만났어요',
+          kicker: '다섯 번째 장면 · 바닷가의 든든한 완충지대',
+          text: '바람이 세지고 파도가 밀려왔어요. 넓고 얕은 갯벌을 지나며 파도와 물의 힘은 조금씩 줄어듭니다. 갯벌은 자연재해의 피해를 줄이는 데에도 도움을 줘요.',
+          clue: '갯벌은 재해를 완전히 없애지는 않지만, 육지에 닿는 힘을 줄이는 데 도움을 줘요.',
+          clueIcon: '🌊',
+          question: '넓은 갯벌은 거센 파도와 물이 육지에 닿기 전에 어떤 도움을 줄까요?',
+          answers: ['폭풍을 완전히 사라지게 한다', '파도와 물의 힘을 줄이는 데 도움을 준다', '파도를 더 빠르게 만든다'],
+          correct: [1],
+          hint: '갯벌은 넓고 얕아요. 파도가 그 위를 지나면 힘이 어떻게 될까요?',
+          feedback: '맞아요. 갯벌은 파도와 물의 힘을 줄여 자연재해 피해를 줄이는 데 도움을 줘요.',
+          value: '자연재해 피해 줄이기',
+          icon: '🌊',
+          short: '파도와 물의 힘을 줄이는 곳',
+          reason: '파도와 물의 힘을 줄여 자연재해 피해를 줄이는 데 도움을 주기',
+          interaction: {
+            instruction: '번개와 파도가 넓은 갯벌을 지나 육지 쪽으로 퍼지는 장면을 살펴보세요.',
+            complete: '파도와 물의 힘이 갯벌 위로 퍼지는 모습을 살펴보았어요.',
+            mode: 'observe',
+            targets: []
+          },
+          audio: 'assets/scene-5-thunder.mp3',
+          audioVolume: .12,
+          image: 'assets/mudflat-storm.webp',
+          position: 'center 57%',
+          tint: 'linear-gradient(90deg, rgba(5,30,38,.18), transparent 62%), linear-gradient(0deg, rgba(5,28,35,.54), transparent 59%)'
+        },
+        {
+          time: '오후 7:00',
+          title: '해 질 무렵, 다시 바라본 갯벌',
+          kicker: '여섯 번째 장면 · 오래 함께하는 방법',
+          text: '사람들은 노을을 바라보고, 새를 관찰하고, 갯벌을 걸으며 자연을 느껴요. 이 좋은 곳을 오래 누리려면 생물을 함부로 잡지 않고 흔적을 남기지 않아야 해요.',
+          clue: '갯벌은 쉬고 관찰하고 자연을 배우는 공간이며, 우리가 함께 지켜야 할 곳이에요.',
+          clueIcon: '🌅',
+          question: '갯벌을 오래 즐기기 위한 행동 두 가지를 골라 보세요.',
+          answers: ['정해진 곳에서 조용히 관찰한다', '쓰레기는 되가져간다', '생물의 구멍을 모두 메운다', '생물을 많이 잡아간다'],
+          correct: [0, 1],
+          hint: '갯벌과 그곳에 사는 생물에게 해를 주지 않는 행동을 두 가지 골라 보세요.',
+          feedback: '좋아요. 조용히 관찰하고 쓰레기를 되가져가면 갯벌을 즐기면서도 지킬 수 있어요.',
+          value: '생태 체험과 휴식',
+          icon: '🌅',
+          short: '자연을 느끼고 배우는 곳',
+          reason: '사람들이 자연을 관찰하고 쉬며 생태를 배울 수 있게 해 주기',
+          interaction: {
+            instruction: '자연을 관찰하는 사람과 철새를 찾아 눌러 보세요.',
+            complete: '사람과 철새가 함께 있는 갯벌 풍경을 찾았어요.',
+            mode: 'any',
+            targets: [
+              { x: 30, y: 8, label: '관찰하는 사람' },
+              { x: 27, y: 50, label: '철새' }
+            ]
+          },
+          audio: 'assets/scene-6-sunset.mp3',
+          audioVolume: .18,
+          mirror: true,
+          image: 'assets/mudflat-sunset.webp',
+          position: 'center 58%',
+          tint: 'linear-gradient(90deg, rgba(65,35,18,.08), transparent 62%), linear-gradient(0deg, rgba(67,35,17,.48), transparent 61%)'
+        }
+      ];
+
+      const state = {
+        mode: 'intro',
+        scene: 0,
+        completed: new Set(),
+        selected: new Set(),
+        answered: false,
+        foundTargets: new Set(),
+        interactionComplete: false,
+        quizDelayReady: false,
+        quizOpen: false,
+        sheetHidden: false,
+        introVisible: false,
+        reflection: null,
+        sound: false
+      };
+
+      const screen = document.getElementById('screen');
+      const image = document.getElementById('sceneImage');
+      const sceneVideo = document.getElementById('sceneVideo');
+      const tint = document.getElementById('sceneTint');
+      const progressDock = document.getElementById('progressDock');
+      const valueCount = document.getElementById('valueCount');
+      const valuePop = document.getElementById('valuePop');
+      const valuePopIcon = document.getElementById('valuePopIcon');
+      const valuePopText = document.getElementById('valuePopText');
+      const toast = document.getElementById('toast');
+      const soundButton = document.getElementById('soundButton');
+      const soundIcon = document.getElementById('soundIcon');
+      const sceneAudio = document.getElementById('sceneAudio');
+      let audioContext;
+      let audioFadeTimer;
+      let backgroundTimer;
+      let popTimer;
+      let toastTimer;
+      let sceneTimers = [];
+
+      const SCENE_VIEW_MS = 11000;
+      const QUIZ_DELAY_MS = 10000;
+
+      const iconSoundOff = '<path d="M11 5 6 9H2v6h4l5 4V5Z"/><path d="m22 9-6 6M16 9l6 6"/>';
+      const iconSoundOn = '<path d="M11 5 6 9H2v6h4l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/>';
+
+      function escapeHtml(value) {
+        return String(value).replace(/[&<>'"]/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
+      }
+
+      function resolveAsset(src) {
+        if (!src) return src;
+        return typeof embeddedAssets === 'object' && embeddedAssets[src] ? embeddedAssets[src] : src;
+      }
+
+      function saveProgress() {
+        try {
+          localStorage.setItem('mudflat-day-progress-v2', JSON.stringify({
+            mode: state.mode,
+            scene: state.scene,
+            completed: [...state.completed],
+            reflection: state.reflection,
+            sound: state.sound
+          }));
+        } catch (_) {}
+      }
+
+      function loadProgress() {
+        try {
+          const saved = JSON.parse(localStorage.getItem('mudflat-day-progress-v2'));
+          if (!saved) return;
+          state.sound = Boolean(saved.sound);
+          if (Array.isArray(saved.completed)) {
+            state.completed = new Set(saved.completed.filter(index => Number.isInteger(index) && index >= 0 && index < scenes.length));
+          }
+          if (Number.isInteger(saved.reflection) && saved.reflection >= 0 && saved.reflection < scenes.length) {
+            state.reflection = saved.reflection;
+          }
+          state.scene = Math.min(state.completed.size, scenes.length - 1);
+        } catch (_) {}
+      }
+
+      function playTone(type = 'tap') {
+        if (!state.sound) return;
+        try {
+          audioContext ||= new (window.AudioContext || window.webkitAudioContext)();
+          const now = audioContext.currentTime;
+          const gain = audioContext.createGain();
+          gain.connect(audioContext.destination);
+          gain.gain.setValueAtTime(0.0001, now);
+          gain.gain.exponentialRampToValueAtTime(type === 'success' ? 0.11 : 0.055, now + 0.015);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + (type === 'success' ? 0.55 : 0.13));
+
+          const notes = type === 'success' ? [523.25, 659.25, 783.99] : [440];
+          notes.forEach((frequency, index) => {
+            const oscillator = audioContext.createOscillator();
+            oscillator.type = 'sine';
+            oscillator.frequency.value = frequency;
+            oscillator.connect(gain);
+            const start = now + index * 0.09;
+            oscillator.start(start);
+            oscillator.stop(start + (type === 'success' ? 0.25 : 0.1));
+          });
+        } catch (_) {}
+      }
+
+      function updateSoundButton() {
+        soundIcon.innerHTML = state.sound ? iconSoundOn : iconSoundOff;
+        soundButton.setAttribute('aria-label', state.sound ? '장면 소리 끄기' : '장면 소리 켜기');
+        soundButton.title = state.sound ? '장면 소리 끄기' : '장면 소리 켜기';
+      }
+
+      function clearAudioFade() {
+        window.clearInterval(audioFadeTimer);
+        audioFadeTimer = undefined;
+      }
+
+      function pauseSceneAudio() {
+        clearAudioFade();
+        sceneAudio.pause();
+      }
+
+      function fadeSceneAudio(targetVolume) {
+        clearAudioFade();
+        const target = Math.max(0, Math.min(.3, targetVolume));
+        audioFadeTimer = window.setInterval(() => {
+          const next = Math.min(target, sceneAudio.volume + .025);
+          sceneAudio.volume = next;
+          if (next >= target) clearAudioFade();
+        }, 90);
+      }
+
+      function setSceneAudio(src, targetVolume = .18) {
+        if (!src) {
+          pauseSceneAudio();
+          sceneAudio.removeAttribute('src');
+          sceneAudio.dataset.source = '';
+          return;
+        }
+
+        const sourceKey = src;
+        src = resolveAsset(src);
+
+        if (sceneAudio.dataset.source !== sourceKey) {
+          pauseSceneAudio();
+          sceneAudio.src = src;
+          sceneAudio.dataset.source = sourceKey;
+          sceneAudio.load();
+        }
+        sceneAudio.dataset.targetVolume = String(targetVolume);
+        if (!state.sound) {
+          sceneAudio.pause();
+          return;
+        }
+
+        sceneAudio.volume = Math.min(sceneAudio.volume || .01, .03);
+        const playPromise = sceneAudio.play();
+        if (playPromise && typeof playPromise.then === 'function') {
+          playPromise.then(() => fadeSceneAudio(targetVolume)).catch(() => {});
+        } else {
+          fadeSceneAudio(targetVolume);
+        }
+      }
+
+      function updateCount() {
+        valueCount.textContent = `${state.completed.size} / ${scenes.length}`;
+      }
+
+      function clearSceneFlow() {
+        sceneTimers.forEach(timer => window.clearTimeout(timer));
+        sceneTimers = [];
+      }
+
+      function restartSceneMotion(index = 0) {
+        image.classList.remove('scene-motion-still', 'scene-motion-food', 'scene-motion-water', 'scene-motion-storm', 'scene-motion-sunset');
+        void image.offsetWidth;
+        const motionClass = [
+          'scene-motion-still',
+          'scene-motion-still',
+          'scene-motion-food',
+          'scene-motion-water',
+          'scene-motion-storm',
+          'scene-motion-sunset'
+        ][index] || 'scene-motion-still';
+        image.classList.add(motionClass);
+      }
+
+      function revealElement(element) {
+        if (!element) return;
+        element.hidden = false;
+        window.requestAnimationFrame(() => {
+          window.requestAnimationFrame(() => element.classList.add('revealed'));
+        });
+      }
+
+      function sceneEffectMarkup(scene, index) {
+        if (index === 0) {
+          const crab = escapeHtml(resolveAsset('assets/shore-crab.png'));
+          return `
+            <div class="crab-mask"></div>
+            <img class="crab-sprite" src="${crab}" alt="">`;
+        }
+        if (index === 1) {
+          const flock = escapeHtml(resolveAsset('assets/sandpiper-flock.png'));
+          return `<img class="bird-flock" src="${flock}" alt="">`;
+        }
+        if (index === 4) return '<div class="storm-flash"></div>';
+        if (index === 5) return '<div class="sunset-glow"></div>';
+        return '';
+      }
+
+      function triggerSceneEffect(effectName) {
+        const effects = document.getElementById('sceneEffects');
+        if (!effects || !effectName) return;
+        effects.classList.add(effectName);
+      }
+
+      function startSceneFlow() {
+        if (state.answered) {
+          state.introVisible = true;
+          state.interactionComplete = true;
+          state.quizDelayReady = true;
+          revealElement(document.getElementById('storyPanel'));
+          updateInteractionUI();
+          updateQuizGate();
+          return;
+        }
+
+        sceneTimers.push(window.setTimeout(() => {
+          if (state.mode !== 'scene') return;
+          state.introVisible = true;
+          revealElement(document.getElementById('storyPanel'));
+          renderHotspots();
+          updateInteractionUI();
+          updateQuizGate();
+
+          sceneTimers.push(window.setTimeout(() => {
+            if (state.mode !== 'scene') return;
+            state.quizDelayReady = true;
+            updateQuizGate();
+            updateCollapsedDock();
+            playTone('tap');
+          }, QUIZ_DELAY_MS));
+        }, SCENE_VIEW_MS));
+      }
+
+      function renderHotspots() {
+        const layer = document.getElementById('sceneHotspots');
+        if (!layer) return;
+        const scene = scenes[state.scene];
+        const targets = scene.interaction.targets;
+
+        if (!targets.length || !state.introVisible || !state.sheetHidden || state.quizOpen || state.answered) {
+          layer.hidden = true;
+          layer.innerHTML = '';
+          return;
+        }
+
+        const nextOrderedIndex = targets.findIndex((_, index) => !state.foundTargets.has(index));
+        layer.hidden = false;
+        layer.innerHTML = targets.map((target, index) => {
+          const found = state.foundTargets.has(index);
+          const locked = scene.interaction.mode === 'ordered' && !found && index !== nextOrderedIndex;
+          const marker = found ? '✓' : scene.interaction.mode === 'ordered' ? index + 1 : '＋';
+          return `<button class="hotspot ${found ? 'found' : ''} ${target.y > 68 ? 'low' : ''}" type="button" data-target="${index}" style="left:${target.x}%;top:${target.y}%" ${found || locked ? 'disabled' : ''} aria-label="${escapeHtml(target.label)}${found ? ', 찾음' : ', 찾기'}" aria-pressed="${found}"><span aria-hidden="true">${marker}</span>${found ? `<span class="hotspot-label">${escapeHtml(target.label)}</span>` : ''}</button>`;
+        }).join('');
+
+        layer.querySelectorAll('.hotspot:not(:disabled)').forEach(button => {
+          button.addEventListener('click', () => {
+            const index = Number(button.dataset.target);
+            if (!Number.isInteger(index) || state.foundTargets.has(index)) return;
+            triggerSceneEffect(targets[index].effect);
+            state.foundTargets.add(index);
+            state.interactionComplete = state.foundTargets.size === targets.length;
+            playTone(state.interactionComplete ? 'success' : 'tap');
+            renderHotspots();
+            updateInteractionUI();
+            updateQuizGate();
+            updateCollapsedDock();
+            if (state.interactionComplete) showToast(scene.interaction.complete);
+          });
+        });
+      }
+
+      function updateInteractionUI() {
+        const scene = scenes[state.scene];
+        const card = document.getElementById('interactionCard');
+        const copy = document.getElementById('interactionCopy');
+        const icon = document.getElementById('interactionIcon');
+        const status = document.getElementById('interactionStatus');
+        if (!card || !copy || !icon || !status) return;
+
+        const total = scene.interaction.targets.length;
+        const observationOnly = total === 0;
+        card.classList.toggle('complete', state.interactionComplete);
+        icon.textContent = observationOnly ? '◉' : state.interactionComplete ? '✓' : '⌖';
+        copy.textContent = observationOnly
+          ? scene.interaction.instruction
+          : state.interactionComplete ? scene.interaction.complete : scene.interaction.instruction;
+        status.textContent = observationOnly ? '관찰' : state.interactionComplete ? '완료' : `${state.foundTargets.size} / ${total}`;
+      }
+
+      function updateQuizGate() {
+        const message = document.getElementById('quizGateMessage');
+        const button = document.getElementById('openQuizButton');
+        if (!message || !button) return;
+        const observationOnly = scenes[state.scene].interaction.targets.length === 0;
+
+        if (!state.quizDelayReady) {
+          message.textContent = observationOnly
+            ? '장면 소개를 읽고 움직이는 풍경을 천천히 살펴보세요.'
+            : '소개를 숨기면 그림 속 단서 표시가 나타나요.';
+          button.hidden = true;
+          button.classList.remove('quiz-ready-signal');
+          return;
+        }
+
+        button.hidden = false;
+        button.disabled = !state.interactionComplete;
+        button.classList.toggle('quiz-ready-signal', state.interactionComplete);
+        button.textContent = state.answered ? '확인 문제 다시 보기' : '확인 문제 열기';
+        message.textContent = state.interactionComplete
+          ? '준비됐어요. 원할 때 확인 문제를 열어 보세요.'
+          : '그림 속 단서를 모두 찾으면 확인 문제를 열 수 있어요.';
+      }
+
+      function hideActiveSheet() {
+        const story = document.getElementById('storyPanel');
+        const quiz = document.getElementById('quizCard');
+        if (story) story.hidden = true;
+        if (quiz) quiz.hidden = true;
+        state.sheetHidden = true;
+        if (!state.quizOpen) renderHotspots();
+        updateCollapsedDock();
+      }
+
+      function showStorySheet() {
+        const story = document.getElementById('storyPanel');
+        const quiz = document.getElementById('quizCard');
+        if (!story || !state.introVisible) return;
+        state.quizOpen = false;
+        state.sheetHidden = false;
+        if (quiz) quiz.hidden = true;
+        revealElement(story);
+        renderHotspots();
+        updateCollapsedDock();
+      }
+
+      function openQuiz() {
+        if (!state.quizDelayReady || !state.interactionComplete) return;
+        const story = document.getElementById('storyPanel');
+        const quiz = document.getElementById('quizCard');
+        const hotspots = document.getElementById('sceneHotspots');
+        if (!quiz) return;
+        state.quizOpen = true;
+        state.sheetHidden = false;
+        if (story) story.hidden = true;
+        if (hotspots) hotspots.hidden = true;
+        revealElement(quiz);
+        quiz.classList.add('quiz-attention');
+        sceneTimers.push(window.setTimeout(() => quiz.classList.remove('quiz-attention'), 2300));
+        updateCollapsedDock();
+        playTone('tap');
+      }
+
+      function updateCollapsedDock() {
+        const dock = document.getElementById('sceneControlDock');
+        if (!dock) return;
+        if (!state.sheetHidden || !state.introVisible) {
+          dock.hidden = true;
+          return;
+        }
+
+        const total = scenes[state.scene].interaction.targets.length;
+        const observationOnly = total === 0;
+        const status = state.answered
+          ? '이 장면의 가치를 발견했어요.'
+          : observationOnly
+            ? '장면을 충분히 살펴봤어요.'
+          : state.interactionComplete
+            ? '그림 속 단서를 모두 찾았어요.'
+            : `단서 찾기 ${state.foundTargets.size} / ${total}`;
+        const quizReady = state.quizDelayReady && state.interactionComplete;
+
+        dock.hidden = false;
+        dock.innerHTML = `
+          <span class="scene-control-status">${status}</span>
+          <span class="scene-control-actions">
+            <button class="dock-button" type="button" data-dock-action="story">소개 보기</button>
+            ${quizReady ? `<button class="dock-button quiz-ready" type="button" data-dock-action="quiz">${state.quizOpen ? '문제 보기' : '문제 열기'}</button>` : ''}
+          </span>`;
+
+        dock.querySelector('[data-dock-action="story"]').addEventListener('click', showStorySheet);
+        const quizButton = dock.querySelector('[data-dock-action="quiz"]');
+        if (quizButton) quizButton.addEventListener('click', openQuiz);
+      }
+
+      function setBackground(src, alt, position, tintStyle, mirrored = false) {
+        const sourceKey = src;
+        src = resolveAsset(src);
+        image.style.setProperty('--scene-flip', mirrored ? '-1' : '1');
+        window.clearTimeout(backgroundTimer);
+        if (image.dataset.source !== sourceKey) {
+          image.style.opacity = '0';
+          backgroundTimer = window.setTimeout(() => {
+            image.src = src;
+            image.dataset.source = sourceKey;
+            image.alt = alt;
+            image.style.objectPosition = position || 'center';
+            image.style.opacity = '1';
+          }, 180);
+        } else {
+          image.alt = alt;
+          image.style.objectPosition = position || 'center';
+          image.style.opacity = '1';
+        }
+        tint.style.background = tintStyle || 'linear-gradient(0deg, rgba(9,42,40,.42), transparent 56%)';
+      }
+
+      function setSceneVideo(src, position, shouldLoop = true, scale = 1.03) {
+        if (!src) {
+          sceneVideo.pause();
+          sceneVideo.classList.remove('active');
+          image.classList.remove('video-active');
+          sceneVideo.dataset.source = '';
+          sceneVideo.removeAttribute('src');
+          sceneVideo.load();
+          return;
+        }
+
+        const sourceKey = src;
+        sceneVideo.loop = shouldLoop;
+        sceneVideo.style.setProperty('--video-scale', String(scale));
+        sceneVideo.style.objectPosition = position || 'center';
+        const revealVideo = () => {
+          if (sceneVideo.dataset.source !== sourceKey) return;
+          const playback = sceneVideo.play();
+          if (playback && typeof playback.catch === 'function') playback.catch(() => {});
+          sceneVideo.classList.add('active');
+          image.classList.add('video-active');
+        };
+
+        if (sceneVideo.dataset.source !== sourceKey) {
+          sceneVideo.classList.remove('active');
+          image.classList.remove('video-active');
+          sceneVideo.dataset.source = sourceKey;
+          sceneVideo.src = resolveAsset(src);
+          sceneVideo.load();
+          sceneVideo.addEventListener('canplay', revealVideo, { once: true });
+        } else if (sceneVideo.readyState >= 2) {
+          revealVideo();
+        }
+      }
+
+      function renderIntro() {
+        clearSceneFlow();
+        state.mode = 'intro';
+        state.selected.clear();
+        state.answered = false;
+        state.introVisible = false;
+        state.sheetHidden = false;
+        state.quizOpen = false;
+        setBackground('assets/mudflat-morning.webp', '바닷물이 빠져 드러난 넓은 갯벌과 새, 게, 조개가 보이는 해안 풍경', 'center 58%', 'linear-gradient(90deg, rgba(12,54,51,.2), transparent 65%), linear-gradient(0deg, rgba(9,42,40,.42), transparent 62%)', false);
+        setSceneVideo(null);
+        pauseSceneAudio();
+        restartSceneMotion(0);
+        progressDock.hidden = true;
+        const hasProgress = state.completed.size > 0;
+        const startLabel = state.completed.size === scenes.length ? '완성한 수첩 보기' : hasProgress ? '이어서 보기' : '하루 시작하기';
+        screen.innerHTML = `
+          <section class="intro-screen">
+            <div class="intro-panel">
+              <div class="eyebrow">초등 3학년 과학 · 이야기 탐험</div>
+              <h1>갯벌의 하루</h1>
+              <p class="lead">바닷물이 빠진 아침부터 노을이 지는 저녁까지, 갯벌이 하는 여섯 가지 일을 만나 보세요.</p>
+              <div class="play-notes" aria-label="활동 안내">
+                <span class="play-note">👀 장면부터 천천히 보기</span>
+                <span class="play-note">☝ 그림 속 단서 찾기</span>
+                <span class="play-note">✓ 준비되면 확인 문제</span>
+                <span class="play-note">🔊 소리 버튼으로 자연음 듣기</span>
+              </div>
+              <button class="primary-button" id="startButton" type="button">${startLabel} <span class="button-arrow" aria-hidden="true">→</span></button>
+            </div>
+          </section>`;
+        document.getElementById('startButton').addEventListener('click', () => {
+          playTone('tap');
+          if (state.completed.size === scenes.length) {
+            renderEnding();
+          } else {
+            state.scene = Math.min(state.completed.size, scenes.length - 1);
+            state.mode = 'scene';
+            renderScene();
+          }
+        });
+        saveProgress();
+      }
+
+      function renderProgress() {
+        progressDock.hidden = false;
+        progressDock.innerHTML = scenes.map((scene, index) => {
+          const current = state.mode === 'scene' && index === state.scene;
+          const done = state.completed.has(index);
+          const reachable = done || index <= Math.min(state.completed.size, scenes.length - 1);
+          return `<button class="progress-dot ${done ? 'done' : ''} ${current ? 'current' : ''} ${reachable ? 'reachable' : ''}" type="button" data-index="${index}" ${reachable ? '' : 'disabled'} aria-label="${index + 1}장면${done ? ', 완료' : current ? ', 현재 장면' : ''}" title="${escapeHtml(scene.title)}"></button>`;
+        }).join('');
+
+        progressDock.querySelectorAll('.progress-dot.reachable').forEach(button => {
+          button.addEventListener('click', () => {
+            const target = Number(button.dataset.index);
+            if (Number.isNaN(target)) return;
+            playTone('tap');
+            state.scene = target;
+            state.mode = 'scene';
+            renderScene();
+          });
+        });
+      }
+
+      function renderScene() {
+        clearSceneFlow();
+        const scene = scenes[state.scene];
+        state.mode = 'scene';
+        state.selected.clear();
+        state.answered = state.completed.has(state.scene);
+        state.foundTargets = new Set();
+        state.interactionComplete = state.answered || scene.interaction.targets.length === 0;
+        state.quizDelayReady = state.answered;
+        state.quizOpen = false;
+        state.sheetHidden = false;
+        state.introVisible = state.answered;
+
+        const altByScene = [
+          '갯벌의 진흙 위에 게와 조개껍데기, 작은 생물의 구멍과 고운 진흙 흔적이 보이는 아침 풍경',
+          '얕은 갯벌에서 먹이를 찾는 철새 두 마리',
+          '조개와 여러 생물이 사는 넓은 갯벌',
+          '얕은 물길이 갯벌 사이로 흐르는 모습',
+          '거센 바람과 파도가 넓은 갯벌 위로 퍼지는 해안 풍경',
+          '노을이 비치는 갯벌과 관찰대에서 자연을 바라보는 사람들'
+        ];
+        setBackground(scene.image, altByScene[state.scene], scene.position, scene.tint, Boolean(scene.mirror));
+        setSceneVideo(scene.video || null, scene.position, scene.videoLoop !== false, scene.videoScale || 1.03);
+        setSceneAudio(scene.audio, scene.audioVolume);
+        restartSceneMotion(state.scene);
+
+        const showImmediately = state.answered;
+
+        screen.innerHTML = `
+          <section class="scene-screen">
+            <header class="scene-heading">
+              <span class="time-tag"><span aria-hidden="true">◷</span> ${escapeHtml(scene.time)}</span>
+              <span class="scene-number">SCENE ${state.scene + 1} / ${scenes.length}</span>
+            </header>
+            <div class="scene-effects" id="sceneEffects" aria-hidden="true">${sceneEffectMarkup(scene, state.scene)}</div>
+            <div class="scene-hotspots" id="sceneHotspots" aria-label="장면 속 단서 찾기" hidden></div>
+            <article class="story-panel reveal-item ${showImmediately ? 'revealed' : ''}" id="storyPanel" ${showImmediately ? '' : 'hidden'}>
+              <div class="sheet-topline">
+                <span class="sheet-caption"><span class="sheet-handle" aria-hidden="true"></span>장면 소개</span>
+                <button class="sheet-hide-button" id="hideStoryButton" type="button"><span aria-hidden="true">⌄</span> 장면만 보기</button>
+              </div>
+              <div class="story-content-grid">
+                <div class="story-copy">
+                  <div class="story-kicker">${escapeHtml(scene.kicker)}</div>
+                  <h2>${escapeHtml(scene.title)}</h2>
+                  <p class="story-text">${escapeHtml(scene.text)}</p>
+                </div>
+                <div class="story-side">
+                  <div class="clue-strip">
+                    <span class="clue-icon" aria-hidden="true">${scene.clueIcon}</span>
+                    <span><strong>장면 속 단서</strong><br>${escapeHtml(scene.clue)}</span>
+                  </div>
+                  <div class="interaction-card ${state.interactionComplete ? 'complete' : ''}" id="interactionCard">
+                    <span class="interaction-icon" id="interactionIcon" aria-hidden="true">${scene.interaction.targets.length === 0 ? '◉' : state.interactionComplete ? '✓' : '⌖'}</span>
+                    <span class="interaction-copy"><strong>${scene.interaction.targets.length === 0 ? '움직이는 장면 살펴보기' : '그림 속에서 직접 찾아보기'}</strong><span id="interactionCopy">${escapeHtml(scene.interaction.targets.length === 0 ? scene.interaction.instruction : state.interactionComplete ? scene.interaction.complete : scene.interaction.instruction)}</span></span>
+                    <span class="interaction-status" id="interactionStatus">${scene.interaction.targets.length === 0 ? '관찰' : state.interactionComplete ? '완료' : `0 / ${scene.interaction.targets.length}`}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="story-actions">
+                <p class="quiz-gate-message" id="quizGateMessage">장면 소개를 읽고, 그림 속 표시를 눌러 단서를 찾아보세요.</p>
+                <button class="primary-button" id="openQuizButton" type="button" hidden>확인 문제 열기</button>
+              </div>
+            </article>
+            <aside class="quiz-card reveal-item" id="quizCard" aria-labelledby="quizTitle" hidden>
+              <div class="sheet-topline">
+                <span class="sheet-caption"><span class="sheet-handle" aria-hidden="true"></span>확인 문제</span>
+                <button class="sheet-hide-button" id="hideQuizButton" type="button"><span aria-hidden="true">⌄</span> 장면만 보기</button>
+              </div>
+              <div class="quiz-label"><span>발견 수첩</span><span>${scene.correct.length > 1 ? '2개 선택' : '1개 선택'}</span></div>
+              <h3 id="quizTitle">${escapeHtml(scene.question)}</h3>
+              <div class="answers" id="answers"></div>
+              <div class="quiz-feedback" id="quizFeedback" role="status"></div>
+              <div class="quiz-actions" id="quizActions"></div>
+            </aside>
+            <div class="scene-control-dock" id="sceneControlDock" aria-live="polite" hidden></div>
+          </section>`;
+
+        document.getElementById('hideStoryButton').addEventListener('click', hideActiveSheet);
+        document.getElementById('hideQuizButton').addEventListener('click', hideActiveSheet);
+        document.getElementById('openQuizButton').addEventListener('click', openQuiz);
+        renderAnswers();
+        renderProgress();
+        updateCount();
+        updateInteractionUI();
+        updateQuizGate();
+        saveProgress();
+        startSceneFlow();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      function renderAnswers() {
+        const scene = scenes[state.scene];
+        const answers = document.getElementById('answers');
+        const feedback = document.getElementById('quizFeedback');
+        const actions = document.getElementById('quizActions');
+
+        answers.innerHTML = scene.answers.map((answer, index) => {
+          const selected = state.selected.has(index);
+          const correctDone = state.answered && scene.correct.includes(index);
+          return `<button class="answer-button ${selected ? 'selected' : ''} ${correctDone ? 'correct' : ''}" type="button" data-answer="${index}" ${state.answered ? 'disabled' : ''}><span class="answer-index">${index + 1}</span><span>${escapeHtml(answer)}</span></button>`;
+        }).join('');
+
+        if (state.answered) {
+          feedback.className = 'quiz-feedback success show';
+          feedback.textContent = scene.feedback;
+          actions.innerHTML = `<button class="primary-button" type="button" id="nextButton">${state.scene === scenes.length - 1 ? '발견 수첩 완성하기' : '다음 장면으로'} <span aria-hidden="true">→</span></button>`;
+          document.getElementById('nextButton').addEventListener('click', goNext);
+          return;
+        }
+
+        answers.querySelectorAll('.answer-button').forEach(button => {
+          button.addEventListener('click', () => {
+            playTone('tap');
+            const index = Number(button.dataset.answer);
+            if (scene.correct.length === 1) {
+              state.selected = new Set([index]);
+              checkAnswer();
+            } else {
+              if (state.selected.has(index)) state.selected.delete(index);
+              else if (state.selected.size < scene.correct.length) state.selected.add(index);
+              renderAnswers();
+            }
+          });
+        });
+
+        if (scene.correct.length > 1) {
+          actions.innerHTML = `<button class="primary-button" type="button" id="checkButton" ${state.selected.size !== scene.correct.length ? 'disabled' : ''}>확인하기</button>`;
+          document.getElementById('checkButton').addEventListener('click', checkAnswer);
+        }
+      }
+
+      function checkAnswer() {
+        const scene = scenes[state.scene];
+        const selected = [...state.selected].sort((a, b) => a - b);
+        const correct = [...scene.correct].sort((a, b) => a - b);
+        const isCorrect = selected.length === correct.length && selected.every((value, index) => value === correct[index]);
+        const feedback = document.getElementById('quizFeedback');
+
+        if (!isCorrect) {
+          const selectedButtons = [...document.querySelectorAll('.answer-button')].filter(button => state.selected.has(Number(button.dataset.answer)));
+          selectedButtons.forEach(button => {
+            button.classList.remove('wrong');
+            void button.offsetWidth;
+            button.classList.add('wrong');
+          });
+          feedback.className = 'quiz-feedback hint show';
+          feedback.textContent = `다시 생각해 볼까요? ${scene.hint}`;
+          state.selected.clear();
+          window.setTimeout(renderAnswers, 700);
+          return;
+        }
+
+        state.answered = true;
+        const wasNew = !state.completed.has(state.scene);
+        state.completed.add(state.scene);
+        playTone('success');
+        renderAnswers();
+        renderProgress();
+        updateCount();
+        saveProgress();
+        if (wasNew) showValuePop(scene);
+      }
+
+      function showValuePop(scene) {
+        window.clearTimeout(popTimer);
+        valuePopIcon.textContent = scene.icon;
+        valuePopText.textContent = scene.value;
+        valuePop.classList.add('show');
+        popTimer = window.setTimeout(() => valuePop.classList.remove('show'), 2400);
+      }
+
+      function goNext() {
+        playTone('tap');
+        if (state.scene < scenes.length - 1) {
+          state.scene += 1;
+          renderScene();
+        } else {
+          renderEnding();
+        }
+      }
+
+      function renderEnding() {
+        clearSceneFlow();
+        state.mode = 'ending';
+        state.selected.clear();
+        state.introVisible = false;
+        state.sheetHidden = false;
+        state.quizOpen = false;
+        setBackground('assets/mudflat-sunset.webp', '노을이 비치는 갯벌과 관찰대에서 자연을 바라보는 사람들', 'center 58%', 'linear-gradient(0deg, rgba(42,25,13,.52), rgba(42,25,13,.1))', true);
+        setSceneVideo(null);
+        setSceneAudio(scenes[5].audio, scenes[5].audioVolume);
+        restartSceneMotion(5);
+        progressDock.hidden = true;
+        screen.innerHTML = `
+          <section class="ending-screen">
+            <div class="ending-panel">
+              <div class="ending-title-row">
+                <div>
+                  <div class="eyebrow">발견 수첩 완성</div>
+                  <h2>갯벌은 여러 일을 해요</h2>
+                  <p class="ending-lead">가장 중요하다고 생각한 가치 하나를 골라 나의 생각을 완성해 보세요.</p>
+                </div>
+              </div>
+              <div class="value-grid" id="valueGrid">
+                ${scenes.map((scene, index) => `
+                  <button class="value-card ${state.reflection === index ? 'selected' : ''}" type="button" data-value="${index}">
+                    <span class="value-icon" aria-hidden="true">${scene.icon}</span>
+                    <span><strong>${escapeHtml(scene.value)}</strong><small>${escapeHtml(scene.short)}</small></span>
+                  </button>`).join('')}
+              </div>
+              <div class="reflection-box">
+                <div class="prompt">나의 생각</div>
+                <div class="sentence-output" id="sentenceOutput">위에서 한 가지 가치를 골라 보세요.</div>
+              </div>
+              <div class="ending-actions">
+                <button class="secondary-button" id="restartButton" type="button">처음부터 다시 보기</button>
+                <div class="ending-actions-group">
+                  <button class="secondary-button" id="printButton" type="button">수첩 인쇄</button>
+                  <button class="primary-button" id="copyButton" type="button" disabled>내 생각 복사하기</button>
+                </div>
+              </div>
+            </div>
+          </section>`;
+
+        document.querySelectorAll('.value-card').forEach(button => {
+          button.addEventListener('click', () => {
+            playTone('tap');
+            state.reflection = Number(button.dataset.value);
+            document.querySelectorAll('.value-card').forEach(card => card.classList.toggle('selected', card === button));
+            updateReflection();
+            saveProgress();
+          });
+        });
+
+        document.getElementById('restartButton').addEventListener('click', () => resetStory(true));
+        document.getElementById('printButton').addEventListener('click', () => window.print());
+        document.getElementById('copyButton').addEventListener('click', copyReflection);
+        updateReflection();
+        updateCount();
+        saveProgress();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      function reflectionSentence() {
+        if (state.reflection === null) return '';
+        const scene = scenes[state.reflection];
+        return `내가 중요하다고 생각한 갯벌의 가치는 ‘${scene.value}’입니다. 갯벌이 ${scene.reason} 때문입니다.`;
+      }
+
+      function updateReflection() {
+        const output = document.getElementById('sentenceOutput');
+        const copy = document.getElementById('copyButton');
+        if (!output || !copy) return;
+        const sentence = reflectionSentence();
+        output.textContent = sentence || '위에서 한 가지 가치를 골라 보세요.';
+        copy.disabled = !sentence;
+      }
+
+      async function copyReflection() {
+        const sentence = reflectionSentence();
+        if (!sentence) return;
+        try {
+          await navigator.clipboard.writeText(sentence);
+          showToast('내 생각을 복사했어요.');
+        } catch (_) {
+          const area = document.createElement('textarea');
+          area.value = sentence;
+          area.style.position = 'fixed';
+          area.style.opacity = '0';
+          document.body.appendChild(area);
+          area.select();
+          document.execCommand('copy');
+          area.remove();
+          showToast('내 생각을 복사했어요.');
+        }
+      }
+
+      function showToast(message) {
+        window.clearTimeout(toastTimer);
+        toast.textContent = message;
+        toast.classList.add('show');
+        toastTimer = window.setTimeout(() => toast.classList.remove('show'), 1900);
+      }
+
+      function resetStory(confirmReset = false) {
+        if (confirmReset && state.completed.size > 0 && !window.confirm('발견한 내용을 지우고 처음부터 다시 볼까요?')) return;
+        state.scene = 0;
+        state.completed.clear();
+        state.selected.clear();
+        state.answered = false;
+        state.foundTargets.clear();
+        state.interactionComplete = false;
+        state.quizDelayReady = false;
+        state.quizOpen = false;
+        state.sheetHidden = false;
+        state.introVisible = false;
+        state.reflection = null;
+        try { localStorage.removeItem('mudflat-day-progress-v2'); } catch (_) {}
+        updateCount();
+        renderIntro();
+      }
+
+      document.getElementById('brandButton').addEventListener('click', () => {
+        playTone('tap');
+        if (state.mode === 'intro') return;
+        renderIntro();
+      });
+
+      soundButton.addEventListener('click', () => {
+        state.sound = !state.sound;
+        updateSoundButton();
+        saveProgress();
+        if (state.sound) {
+          if (state.mode === 'scene') {
+            const scene = scenes[state.scene];
+            setSceneAudio(scene.audio, scene.audioVolume);
+          } else if (state.mode === 'ending') {
+            setSceneAudio(scenes[5].audio, scenes[5].audioVolume);
+          }
+          playTone('success');
+        } else {
+          pauseSceneAudio();
+        }
+      });
+
+      loadProgress();
+      updateSoundButton();
+      updateCount();
+      renderIntro();
+    })();
+  </script>
+</body>
+</html>
